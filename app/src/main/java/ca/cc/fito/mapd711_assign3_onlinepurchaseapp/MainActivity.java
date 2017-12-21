@@ -75,6 +75,11 @@ public class MainActivity extends Activity
         final String fields[] = {"employee_id", "username", "password", "firstname", "lastname"};
         final String record[] = new String[5];
 */
+/*
+        //--- Add product ---
+        final String fields[] = {"product_id", "productname", "price", "quantity", "category"};
+        final String record[] = new String[5];
+*/
 
         // Handle Login button
         final Button btnLogin = (Button) findViewById(R.id.btnLogin);
@@ -106,6 +111,19 @@ public class MainActivity extends Activity
                 ContentValues values = new ContentValues();
                 db.addRecord(values, "tblEmployee", fields, record);
 */
+/*
+                //--- Add product fields ---
+                record[1] = "Broccoli"; //productname
+                record[2] = "1.29";    //price
+                record[3] = "1 kg";      //quantity
+                record[4] = "Veggy";       //category
+                ContentValues values = new ContentValues();
+                db.addRecord(values, "tblProduct", fields, record);
+*/
+/*
+                <item>Veggy: Broccoli (1 kg) - $1.29</item>
+*/
+
                 Boolean found = false;
                 String outUsername = "";
                 String outPassword = "";
@@ -141,7 +159,7 @@ public class MainActivity extends Activity
                                 ((EditText) findViewById(R.id.etUsername)).getText().toString());
                         customerEditor.commit();
 
-                        Intent i = new Intent("ca.cc.fito.mapd711_assign3_onlinepurchaseapp.CustomerActivity");
+                        Intent i = new Intent( "ca.cc.fito.mapd711_assign3_onlinepurchaseapp.OrderActivity");
                         startActivity(i);
                     }
 
@@ -156,7 +174,7 @@ public class MainActivity extends Activity
         });
     }
     public void onClickLoad(View view) {
-        Intent i = new Intent("ca.cc.fito.mapd711_assign3_onlinepurchaseapp.CustomerActivity");
+        Intent i = new Intent("ca.cc.fito.mapd711_assign3_onlinepurchaseapp.PreferencesActivity");
         startActivity(i);
     }
 
