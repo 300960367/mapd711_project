@@ -8,7 +8,9 @@
 -->
 
 <PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+          tools:layout_editor_absoluteY="81dp">
     <PreferenceCategory android:title="Category 1">
         <CheckBoxPreference
             android:title="Checkbox"
@@ -16,12 +18,12 @@
             android:summary="True or False"
             android:key="checkboxPref" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="Category 2">
+    <PreferenceCategory android:title="System">
         <EditTextPreference
-            android:summary="Enter a string"
-            android:defaultValue="[Enter a string here]"
-            android:title="Edit Text"
-            android:key="editTextPref" />
+            android:summary="User signed in"
+            android:defaultValue="[Enter here a text]"
+            android:title="Username"
+            android:key="usernamePref" />
         <RingtonePreference
             android:summary="Select a ringtone"
             android:title="Ringtones"

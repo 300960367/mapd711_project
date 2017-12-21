@@ -86,7 +86,7 @@ public class MainActivity extends Activity
             public void onClick(View v) {
 
 /*
-                //--- Add customer fields
+                //--- Add customer fields ---
                 record[1] = "fito";
                 record[2] = "secret";
                 record[3] = "Fernando";
@@ -98,7 +98,7 @@ public class MainActivity extends Activity
                 db.addRecord(values, "tblCustomer", fields, record);
 */
 /*
-                //--- Add employee fields
+                //--- Add employee fields ---
                 record[1] = "300960367";
                 record[2] = "secret";
                 record[3] = "John";
@@ -111,15 +111,12 @@ public class MainActivity extends Activity
                 String outPassword = "";
                 String outTable = "";
 
-                // Validate
+                //--- Validate username, password and type of user (Customer or Employee) ---
                 for (int i=0;i<2;i++) {
                     List table = db.getTable(tables[i]);
 
                     for (Object o : table) {
                         ArrayList row = (ArrayList) o;
-
-//                        String outUsername = row.get(1).toString();
-//                        String outPassword = row.get(2).toString();
 
                         if (row.get(1).toString().equals(etUsername.getText().toString()) &&
                                 row.get(2).toString().equals(etPassword.getText().toString())) {
@@ -130,12 +127,31 @@ public class MainActivity extends Activity
                         }
                     }
                 }
-                if (found) display.setText("Username: " + outUsername + ", Password: " + outPassword + ", Table: " + outTable);
-                else display.setText(
-                        "Username or Password incorrect. Please try: \n" +
-                        "CUSTOMER: Username='fito', Password='secret' \n" +
-                        "EMPLOYEE: Username='300960367', Password='secret' \n"
-                 );
+
+                if (found) {
+                    display.setText("Username: " + outUsername + ", Password: " + outPassword + ", Table: " + outTable);
+
+                    // a. Main activity with two login options one for customers and other one for shipment clerk.
+                    if (outTable == "tblCustomer") {
+                        // b. Customers and Clerks username will be stored in Shared Preferences after successful login.
+                        SharedPreferences customerPref = getSharedPreferences(
+                                "ca.cc.fito.mapd711_assign3_onlinepurchaseapp_preferences", MODE_PRIVATE);
+                        SharedPreferences.Editor customerEditor = customerPref.edit();
+                        customerEditor.putString("usernamePref",
+                                ((EditText) findViewById(R.id.etUsername)).getText().toString());
+                        customerEditor.commit();
+
+                        Intent i = new Intent("ca.cc.fito.mapd711_assign3_onlinepurchaseapp.CustomerActivity");
+                        startActivity(i);
+                    }
+
+                } else {
+                    display.setText(
+                            "Username or Password incorrect. Please try: \n" +
+                                    "CUSTOMER: Username='fito', Password='secret' \n" +
+                                    "EMPLOYEE: Username='300960367', Password='secret' \n"
+                    );
+                }
             }
         });
     }
@@ -147,9 +163,10 @@ public class MainActivity extends Activity
     public void onClickDisplay(View view) {
         SharedPreferences appPrefs = getSharedPreferences(
                 "ca.cc.fito.mapd711_assign3_onlinepurchaseapp_preferences", MODE_PRIVATE);
-        DisplayText(appPrefs.getString("editTextPref", ""));
+        DisplayText(appPrefs.getString("usernamePref", ""));
     }
 
+    /*
     public void onClickModify(View view) {
         SharedPreferences appPrefs = getSharedPreferences(
                 "ca.cc.fito.mapd711_assign3_onlinepurchaseapp_preferences", MODE_PRIVATE);
@@ -158,6 +175,7 @@ public class MainActivity extends Activity
                 ((EditText) findViewById(R.id.etUsername)).getText().toString());
         prefsEditor.commit();
     }
+    */
 
     private void DisplayText(String str) {
         Toast.makeText(getBaseContext(), str, Toast.LENGTH_LONG).show();
