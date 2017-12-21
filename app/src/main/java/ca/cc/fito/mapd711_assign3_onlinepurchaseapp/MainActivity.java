@@ -18,6 +18,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends Activity
 {
 
@@ -62,12 +65,21 @@ public class MainActivity extends Activity
         final DatabaseManager db = new DatabaseManager(this);
         db.dbInitialize(tables, tableCreatorString);
 
+/*
         //--- Add customer ---
+        final String fields[] = {"employee_id", "username", "password", "firstname", "lastname", "address", "city", "postal_code"};
+        final String record[] = new String[5];
+*/
+/*
+        //--- Add employee ---
         final String fields[] = {"employee_id", "username", "password", "firstname", "lastname"};
         final String record[] = new String[5];
+*/
 
         // Handle Login button
         final Button btnLogin = (Button) findViewById(R.id.btnLogin);
+        final EditText etUsername = (EditText) findViewById(R.id.etUsername);
+        final EditText etPassword = (EditText) findViewById(R.id.etPassword);
         final TextView display = (TextView) findViewById(R.id.tvDisplay);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +97,7 @@ public class MainActivity extends Activity
                 ContentValues values = new ContentValues();
                 db.addRecord(values, "tblCustomer", fields, record);
 */
-
+/*
                 //--- Add employee fields
                 record[1] = "300960367";
                 record[2] = "secret";
@@ -93,7 +105,37 @@ public class MainActivity extends Activity
                 record[4] = "Doe";
                 ContentValues values = new ContentValues();
                 db.addRecord(values, "tblEmployee", fields, record);
+*/
+                Boolean found = false;
+                String outUsername = "";
+                String outPassword = "";
+                String outTable = "";
 
+                // Validate
+                for (int i=0;i<2;i++) {
+                    List table = db.getTable(tables[i]);
+
+                    for (Object o : table) {
+                        ArrayList row = (ArrayList) o;
+
+//                        String outUsername = row.get(1).toString();
+//                        String outPassword = row.get(2).toString();
+
+                        if (row.get(1).toString().equals(etUsername.getText().toString()) &&
+                                row.get(2).toString().equals(etPassword.getText().toString())) {
+                            outUsername = row.get(1).toString();
+                            outPassword = row.get(2).toString();
+                            outTable = tables[i];
+                            found = true;
+                        }
+                    }
+                }
+                if (found) display.setText("Username: " + outUsername + ", Password: " + outPassword + ", Table: " + outTable);
+                else display.setText(
+                        "Username or Password incorrect. Please try: \n" +
+                        "CUSTOMER: Username='fito', Password='secret' \n" +
+                        "EMPLOYEE: Username='300960367', Password='secret' \n"
+                 );
             }
         });
     }
