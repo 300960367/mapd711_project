@@ -5,97 +5,98 @@ package ca.cc.fito.mapd711_assign3_onlinepurchaseapp;
 /* Fernando Ito - 300960367                      */
 /* Santhosh Damodharan - 300964037               */
 
+import android.app.Activity;
+import android.content.ContentValues;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
-import android.database.Cursor;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity
+{
+
+    private static final String tables[]={"tblCustomer","tblEmployee", "tblProduct", "tblOrder"};
+    private static final String tableCreatorString[] =
+            {
+            "CREATE TABLE tblCustomer (" +
+                    "customer_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "username TEXT, " +
+                    "password TEXT, " +
+                    "firstname TEXT, " +
+                    "lastname TEXT, " +
+                    "address TEXT, " +
+                    "city TEXT, " +
+                    "postal_code TEXT);",
+            "CREATE TABLE tblEmployee (" +
+                    "employee_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "username TEXT, " +
+                    "password TEXT, " +
+                    "firstname TEXT, " +
+                    "lastname TEXT);",
+            "CREATE TABLE tblProduct (" +
+                    "product_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "productname TEXT, " +
+                    "price TEXT, " +
+                    "quantity TEXT, " +
+                    "category TEXT);",
+            "CREATE TABLE tblOrder (" +
+                    "order_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "customer_id TEXT, " +
+                    "product_id TEXT, " +
+                    "employee_id TEXT, " +
+                    "order_date TEXT, " +
+                    "status TEXT);"
+            };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        DBAdapter db = new DBAdapter(this);
+        final DatabaseManager db = new DatabaseManager(this);
+        db.dbInitialize(tables, tableCreatorString);
+
+        //--- Add customer ---
+        final String fields[] = {"employee_id", "username", "password", "firstname", "lastname"};
+        final String record[] = new String[5];
+
+        // Handle Login button
+        final Button btnLogin = (Button) findViewById(R.id.btnLogin);
+        final TextView display = (TextView) findViewById(R.id.tvDisplay);
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
 
 /*
-        //--- add a customer ---
-        db.open();
-        long id = db.insertCustomer("fito", "password", "Fernando", "Ito",
-                "937, Progress Ave, Room 229", "Scarborough, ON", "M1G 3T8");
-        id = db.insertCustomer("sdamadharan", "password", "Santhosh", "Damadharan",
-                "937, Progress Ave, Room 729", "Scarborough, ON", "M1G 3T8");
-        db.close();
+                //--- Add customer fields
+                record[1] = "fito";
+                record[2] = "secret";
+                record[3] = "Fernando";
+                record[4] = "Ito";
+                record[5] = "937, Progress Ave";
+                record[6] = "Scarborough, ON";
+                record[7] = "M1G 3T8";
+                ContentValues values = new ContentValues();
+                db.addRecord(values, "tblCustomer", fields, record);
 */
 
+                //--- Add employee fields
+                record[1] = "300960367";
+                record[2] = "secret";
+                record[3] = "John";
+                record[4] = "Doe";
+                ContentValues values = new ContentValues();
+                db.addRecord(values, "tblEmployee", fields, record);
 
-        //--- retrieve all customers ---
-        db.open();
-        Cursor c = db.getAllCustomers();
-        if (c.moveToFirst())
-        {
-            do {
-                DisplayCustomer(c);
-            } while (c.moveToNext());
-        }
-        db.close();
-
-
-/*
-        //--- retrieve all customers ---
-        db.open();
-        Cursor c = db.getAllCustomers();
-*/
-
-/*
-        //--- get a customer ---
-        db.open();
-        Cursor c = db.getCustomer(1);
-        if (c.moveToFirst())
-            DisplayCustomer(c);
-        else
-            Toast.makeText(this, "No contact found", Toast.LENGTH_LONG).show();
-        db.close();
-*/
-
-/*
-        //--- update a customer ---
-        db.open();
-        if (db.updateCustomer(1, "fito", "password", "Fernando",
-                "Ito", "19 - 5535, Glen Erin Dr", "Mississauga, ON", "L43 L2N"))
-            Toast.makeText(this, "Update successful.", Toast.LENGTH_LONG).show();
-        else
-            Toast.makeText(this, "Update failed.", Toast.LENGTH_LONG).show();
-        db.close();
-*/
-
-/*
-        //--- delete a customer ---
-        db.open();
-        if (db.deleteCustomer(2))
-            Toast.makeText(this, "Delete successful.", Toast.LENGTH_LONG).show();
-        else
-            Toast.makeText(this, "Delete failed.", Toast.LENGTH_LONG).show();
-        db.close();
-*/
+            }
+        });
     }
-
-    public void DisplayCustomer(Cursor c) {
-        Toast.makeText(this,
-                "Customer ID: " + c.getString(0) + "\n" +
-                        "First name: " + c.getString(1) + "\n" +
-                        "Last name: " + c.getString(2) + "\n" +
-                        "Address: " + c.getString(3) + "\n" +
-                        "City: " + c.getString(4) + "\n" +
-                        "Postal Code: " + c.getString(5),
-                Toast.LENGTH_LONG).show();
-    }
-
     public void onClickLoad(View view) {
         Intent i = new Intent("ca.cc.fito.mapd711_assign3_onlinepurchaseapp.CustomerActivity");
         startActivity(i);
@@ -112,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                 "ca.cc.fito.mapd711_assign3_onlinepurchaseapp_preferences", MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = appPrefs.edit();
         prefsEditor.putString("editTextPref",
-                ((EditText) findViewById(R.id.editText)).getText().toString());
+                ((EditText) findViewById(R.id.etUsername)).getText().toString());
         prefsEditor.commit();
     }
 
@@ -121,3 +122,4 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
+

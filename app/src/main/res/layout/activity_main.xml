@@ -13,55 +13,91 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ca.cc.fito.mapd711_assign3_onlinepurchaseapp.MainActivity">
+    tools:context="ca.cc.fito.mapd711_assign3_onlinepurchaseapp.MainActivity"
+    tools:layout_editor_absoluteY="81dp">
 
     <Button
         android:id="@+id/btnPreferences"
-        android:layout_width="310dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="180dp"
         android:onClick="onClickLoad"
         android:text="Load Preferences Screen"
-        app:layout_constraintBottom_toBottomOf="@+id/activity_main"
-        app:layout_constraintLeft_toLeftOf="@+id/activity_main"
-        app:layout_constraintRight_toRightOf="@+id/activity_main"
-        app:layout_constraintTop_toTopOf="@+id/activity_main"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etUsername" />
 
     <Button
         android:id="@+id/btnDisplayValues"
-        android:layout_width="310dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:onClick="onClickDisplay"
         android:text="Display Preferences Values"
-        app:layout_constraintLeft_toLeftOf="@+id/btnPreferences"
-        app:layout_constraintRight_toRightOf="@+id/btnPreferences"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnPreferences" />
 
     <EditText
-        android:id="@+id/editText"
-        android:layout_width="310dp"
+        android:id="@+id/etUsername"
+        android:layout_width="355dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintRight_toRightOf="@+id/btnPreferences"
-        app:layout_constraintLeft_toLeftOf="@+id/btnPreferences"
-        app:layout_constraintTop_toBottomOf="@+id/btnDisplayValues" />
+        android:hint="Username"
+        android:inputType="textShortMessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDisplay" />
 
     <Button
         android:id="@+id/btnModifyValues"
-        android:layout_width="fill_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:onClick="onClickModify"
         android:text="Modify Preferences Values"
-        app:layout_constraintLeft_toLeftOf="@+id/btnDisplayValues"
-        app:layout_constraintRight_toRightOf="@+id/btnDisplayValues"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnDisplayValues" />
+
+    <TextView
+        android:id="@+id/tvDisplay"
+        android:layout_width="355dp"
+        android:layout_height="70dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="355dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Login"
+        app:layout_constraintTop_toBottomOf="@+id/etPassword"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="355dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        app:layout_constraintTop_toBottomOf="@+id/etUsername"
+        tools:layout_editor_absoluteX="16dp" />
 
 </android.support.constraint.ConstraintLayout>
