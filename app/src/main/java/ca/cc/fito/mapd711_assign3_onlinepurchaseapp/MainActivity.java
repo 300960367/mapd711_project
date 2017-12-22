@@ -67,19 +67,19 @@ public class MainActivity extends Activity
 
 /*
         //--- Add customer ---
-        final String fields[] = {"employee_id", "username", "password", "firstname", "lastname", "address", "city", "postal_code"};
-        final String record[] = new String[5];
+        final String fields[] = {"customer_id", "username", "password", "firstname", "lastname", "address", "city", "postal_code"};
+        final String record[] = new String[8];
 */
 /*
         //--- Add employee ---
         final String fields[] = {"employee_id", "username", "password", "firstname", "lastname"};
         final String record[] = new String[5];
 */
-/*
+
         //--- Add product ---
         final String fields[] = {"product_id", "productname", "price", "quantity", "category"};
         final String record[] = new String[5];
-*/
+
 
         // Handle Login button
         final Button btnLogin = (Button) findViewById(R.id.btnLogin);
@@ -87,16 +87,74 @@ public class MainActivity extends Activity
         final EditText etPassword = (EditText) findViewById(R.id.etPassword);
         final TextView display = (TextView) findViewById(R.id.tvDisplay);
 
+
+
+
+
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
 /*
+                db.deleteRecord("tblCustomer", "customer_id", "5");
+*/
+/*
+        <item>Produce: Garlic Product of China (5 count) - $0.67 - Produce</item>
+        <item>Meat: Frozen Halal Turkey (1 unit) - $2.99 - Produce</item>
+        <item>Bakery: Dinner Rolls (24 unit) - $1.99</item>
+        <item>Bakery: Cheescake (1 unit) - $12.00V</item>
+*/
+
+                // Reading all records
+//                List table = db.getTable("tblProduct");
+/*
+                record[1] = "Garlic Product of China"; //productname
+                record[2] = "0.67";    //price
+                record[3] = "5 unit";      //quantity
+                record[4] = "Produce";       //category
+                ContentValues values = new ContentValues();
+                db.updateRecord(values, "tblProduct", fields,record);
+*/
+
+/*
+                for (Object o : table) {
+                    ArrayList row = (ArrayList)o;
+                    // Writing table to log
+                    String output="";
+                    for (int i=0;i<row.size();i+=5)
+                    {
+                        output += "Product #";
+                        output += row.get(i).toString() + ": ";
+                        output += row.get(i+1).toString() + " (";
+                        output += row.get(i+3).toString() + ") - $";
+                        output += row.get(i+2).toString();
+                        output += "\n";
+                    }
+                    display.setText(output);
+                }
+*/
+
+/*
+                record[1]= studentName.getText().toString();
+                record[2]= programName.getText().toString();
+                Log.d("Name: ", record[1]);
+                //populate the row with some values
+                ContentValues values = new ContentValues();
+                //for (int i=1;i<record.length;i++)
+                //values.put(fields[i],record[i]);
+                //add the row to the database
+                db.addRecord(values, "tbl_student", fields,record);
+*/
+
+
+
+/*
                 //--- Add customer fields ---
-                record[1] = "fito";
+                record[1] = "sdamodha";
                 record[2] = "secret";
-                record[3] = "Fernando";
-                record[4] = "Ito";
-                record[5] = "937, Progress Ave";
+                record[3] = "Santhosh";
+                record[4] = "Damodharan";
+                record[5] = "941, Progress Ave";
                 record[6] = "Scarborough, ON";
                 record[7] = "M1G 3T8";
                 ContentValues values = new ContentValues();
@@ -124,33 +182,50 @@ public class MainActivity extends Activity
                 <item>Veggy: Broccoli (1 kg) - $1.29</item>
 */
 
-                Boolean found = false;
+
+
+
+
+
                 String outUsername = "";
                 String outPassword = "";
                 String outTable = "";
 
                 //--- Validate username, password and type of user (Customer or Employee) ---
-                for (int i=0;i<2;i++) {
-                    List table = db.getTable(tables[i]);
+                    List table = db.getTable("tblCustomer");
 
                     for (Object o : table) {
                         ArrayList row = (ArrayList) o;
+                        for (int x=1; x<row.size(); x+=8) {
+                            if (row.get(x).toString().equals(etUsername.getText().toString()) &&
+                                    row.get(x+1).toString().equals(etPassword.getText().toString())) {
+                                outUsername = row.get(x).toString();
+                                outPassword = row.get(x+1).toString();
+                                outTable = "Customer";
+                            }
+                        }
+                    }
 
-                        if (row.get(1).toString().equals(etUsername.getText().toString()) &&
-                                row.get(2).toString().equals(etPassword.getText().toString())) {
-                            outUsername = row.get(1).toString();
-                            outPassword = row.get(2).toString();
-                            outTable = tables[i];
-                            found = true;
+
+                table = db.getTable("tblEmployee");
+
+                for (Object o : table) {
+                    ArrayList row = (ArrayList) o;
+                    for (int x=1; x<row.size(); x+=5) {
+                        if (row.get(x).toString().equals(etUsername.getText().toString()) &&
+                                row.get(x+1).toString().equals(etPassword.getText().toString())) {
+                            outUsername = row.get(x).toString();
+                            outPassword = row.get(x+1).toString();
+                            outTable = "Staff";
                         }
                     }
                 }
 
-                if (found) {
-                    display.setText("Username: " + outUsername + ", Password: " + outPassword + ", Table: " + outTable);
+                if (outUsername != "") {
+                    display.setText("Usernae: " + outUsername + ", Password: " + outPassword + ", Table: " + outTable);
 
                     // a. Main activity with two login options one for customers and other one for shipment clerk.
-                    if (outTable == "tblCustomer") {
+                    if (outTable == "Customer") {
                         // b. Customers and Clerks username will be stored in Shared Preferences after successful login.
                         SharedPreferences customerPref = getSharedPreferences(
                                 "ca.cc.fito.mapd711_assign3_onlinepurchaseapp_preferences", MODE_PRIVATE);
@@ -159,7 +234,7 @@ public class MainActivity extends Activity
                                 ((EditText) findViewById(R.id.etUsername)).getText().toString());
                         customerEditor.commit();
 
-                        Intent i = new Intent( "ca.cc.fito.mapd711_assign3_onlinepurchaseapp.OrderActivity");
+                        Intent i = new Intent("ca.cc.fito.mapd711_assign3_onlinepurchaseapp.OrderActivity");
                         startActivity(i);
                     }
 
@@ -167,10 +242,10 @@ public class MainActivity extends Activity
                     display.setText(
                             "Username or Password incorrect. Please try: \n" +
                                     "CUSTOMER: Username='fito', Password='secret' \n" +
-                                    "EMPLOYEE: Username='300960367', Password='secret' \n"
-                    );
+                                    "EMPLOYEE: Username='300960367', Password='secret' \n");
                 }
-            }
+
+            };
         });
     }
     public void onClickLoad(View view) {
@@ -184,7 +259,7 @@ public class MainActivity extends Activity
         DisplayText(appPrefs.getString("usernamePref", ""));
     }
 
-    /*
+
     public void onClickModify(View view) {
         SharedPreferences appPrefs = getSharedPreferences(
                 "ca.cc.fito.mapd711_assign3_onlinepurchaseapp_preferences", MODE_PRIVATE);
@@ -193,7 +268,7 @@ public class MainActivity extends Activity
                 ((EditText) findViewById(R.id.etUsername)).getText().toString());
         prefsEditor.commit();
     }
-    */
+
 
     private void DisplayText(String str) {
         Toast.makeText(getBaseContext(), str, Toast.LENGTH_LONG).show();
