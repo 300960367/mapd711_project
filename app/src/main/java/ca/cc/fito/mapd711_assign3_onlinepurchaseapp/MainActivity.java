@@ -81,6 +81,7 @@ public class MainActivity extends Activity
         //--- Add customer ---
         final String fields[] = {"customer_id", "username", "password", "firstname", "lastname", "address", "city", "postal_code"};
         final String record[] = new String[8];
+
 */
 /*
         //--- Add employee ---
@@ -129,18 +130,32 @@ public class MainActivity extends Activity
         <item>Bakery: Dinner Rolls (24 unit) - $1.99</item>
         <item>Bakery: Cheescake (1 unit) - $12.00V</item>
 */
-
-                // Update Product
-//                List table = db.getTable("tblProduct");
 /*
-                record[1] = "Garlic Product of China"; //productname
-                record[2] = "0.67";    //price
-                record[3] = "5 unit";      //quantity
-                record[4] = "Produce";       //category
+                // Update Product
+
+                List table = db.getTable("tblProduct");
+                record[1] = "Broccoli"; //productname
+                record[2] = "1.29";    //price
+                record[3] = "1 kg";      //quantity
+                record[4] = "Veggie";       //category
                 ContentValues values = new ContentValues();
                 db.updateRecord(values, "tblProduct", fields,record);
 */
+/*
+    <string-array name="shoppingItem">
+        <item>1: Lemons Product of Spain (1 kg) - 0.50 - Produce</item>
+        <item>2: Garlic Product of China (5 count) - 0.67 - Produce</item>
+        <item>3: Fresh Chicken Leg Quarters (1 unit) - 7.00 - Meat</item>
+        <item>4: Frozen Halal Turkey (1 unit) - 2.99 - Meat</item>
+        <item>5: Dinner Rolls (24 unit) - 1.99 - Deli</item>
+        <item>6: Cheescake (1 unit) - 12.00 - Deli</item>
+        <item>7: Muzzarella Balls (260 g) - 2.49 - Breakfast</item>
+        <item>8: Blackberries (170 g) - 2.49 - Fruit</item>
+        <item>9: Green Bell Peppers (1 kg) - 4.29 - Veggie</item>
 
+        <item>10: Broccoli (1 kg) - 1.29 - Veggie</item>
+    </string-array>
+*/
 /*
                 for (Object o : table) {
                     ArrayList row = (ArrayList)o;
@@ -173,11 +188,11 @@ public class MainActivity extends Activity
 
 /*
                 //--- Add customer fields ---
-                record[1] = "sdamodha";
+                record[1] = "fito";
                 record[2] = "secret";
-                record[3] = "Santhosh";
-                record[4] = "Damodharan";
-                record[5] = "941, Progress Ave";
+                record[3] = "Fernando";
+                record[4] = "Ito";
+                record[5] = "937, Progress Ave";
                 record[6] = "Scarborough, ON";
                 record[7] = "M1G 3T8";
                 ContentValues values = new ContentValues();
@@ -185,7 +200,7 @@ public class MainActivity extends Activity
 */
 /*
                 //--- Add employee fields ---
-                record[1] = "300960367";
+                record[1] = "jdoe";
                 record[2] = "secret";
                 record[3] = "John";
                 record[4] = "Doe";
@@ -281,7 +296,7 @@ public class MainActivity extends Activity
                     display.setText(
                             "Username or Password incorrect. Please try: \n" +
                                     "CUSTOMER: Username='fito', Password='secret' \n" +
-                                    "EMPLOYEE: Username='300960367', Password='secret' \n");
+                                    "EMPLOYEE: Username='jdoe', Password='secret' \n");
                 }
 
 /**/
