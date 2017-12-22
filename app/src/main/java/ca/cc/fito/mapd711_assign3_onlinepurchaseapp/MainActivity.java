@@ -5,24 +5,35 @@ package ca.cc.fito.mapd711_assign3_onlinepurchaseapp;
 /* Fernando Ito - 300960367                      */
 /* Santhosh Damodharan - 300964037               */
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends Activity
 {
+/*
+    Calendar calendar;
+    SimpleDateFormat simpleDateFormat;
+    String Date;
+*/
 
     private static final String tables[]={"tblCustomer","tblEmployee", "tblProduct", "tblOrder"};
     private static final String tableCreatorString[] =
@@ -62,6 +73,7 @@ public class MainActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         final DatabaseManager db = new DatabaseManager(this);
         db.dbInitialize(tables, tableCreatorString);
 
@@ -75,11 +87,21 @@ public class MainActivity extends Activity
         final String fields[] = {"employee_id", "username", "password", "firstname", "lastname"};
         final String record[] = new String[5];
 */
-
+/*
         //--- Add product ---
         final String fields[] = {"product_id", "productname", "price", "quantity", "category"};
         final String record[] = new String[5];
+*/
+/*
+        //--- Add order ---
+        final String fields[] = {"order_id", "customer_id", "product_id", "employee_id", "order_date", "status"};
+        final String record[] = new String[6];
 
+        //--- Get current date and time ---
+        calendar = Calendar.getInstance();
+        simpleDateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+        Date =  simpleDateFormat.format(calendar.getTime());
+*/
 
         // Handle Login button
         final Button btnLogin = (Button) findViewById(R.id.btnLogin);
@@ -87,12 +109,15 @@ public class MainActivity extends Activity
         final EditText etPassword = (EditText) findViewById(R.id.etPassword);
         final TextView display = (TextView) findViewById(R.id.tvDisplay);
 
-
-
-
-
+/*
+        ActionBar actionBar = getActionBar(); // or getActionBar();
+        actionBar.setTitle(etUsername.toString()); // set the top title
+        String title = actionBar.getTitle().toString(); // get the title
+        actionBar.hide(); // or even hide the actionbar
+*/
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
 
 /*
@@ -105,7 +130,7 @@ public class MainActivity extends Activity
         <item>Bakery: Cheescake (1 unit) - $12.00V</item>
 */
 
-                // Reading all records
+                // Update Product
 //                List table = db.getTable("tblProduct");
 /*
                 record[1] = "Garlic Product of China"; //productname
@@ -146,8 +171,6 @@ public class MainActivity extends Activity
                 db.addRecord(values, "tbl_student", fields,record);
 */
 
-
-
 /*
                 //--- Add customer fields ---
                 record[1] = "sdamodha";
@@ -172,16 +195,22 @@ public class MainActivity extends Activity
 /*
                 //--- Add product fields ---
                 record[1] = "Broccoli"; //productname
-                record[2] = "1.29";    //price
-                record[3] = "1 kg";      //quantity
-                record[4] = "Veggy";       //category
+                record[2] = "1.29"; //price
+                record[3] = "1 kg"; //quantity
+                record[4] = "Veggy"; //category
                 ContentValues values = new ContentValues();
                 db.addRecord(values, "tblProduct", fields, record);
 */
 /*
-                <item>Veggy: Broccoli (1 kg) - $1.29</item>
+                //--- Add order fields ---
+                record[1] = "1"; //customer_id
+                record[2] = "1"; //product_id
+                record[3] = "1"; //employee_id
+                record[4] = Date; //order_date
+                record[5] = "In-Process"; //status
+                ContentValues values = new ContentValues();
+                db.addRecord(values, "tblOrder", fields, record);
 */
-
 
 
 
@@ -222,7 +251,7 @@ public class MainActivity extends Activity
                 }
 
                 if (outUsername != "") {
-                    display.setText("Usernae: " + outUsername + ", Password: " + outPassword + ", Table: " + outTable);
+                    display.setText("Username: " + outUsername + ", Password: " + outPassword + ", Table: " + outTable);
 
                     // a. Main activity with two login options one for customers and other one for shipment clerk.
                     if (outTable == "Customer") {
@@ -236,8 +265,18 @@ public class MainActivity extends Activity
 
                         Intent i = new Intent("ca.cc.fito.mapd711_assign3_onlinepurchaseapp.OrderActivity");
                         startActivity(i);
-                    }
+                    } else {
+                        // b. Customers and Clerks username will be stored in Shared Preferences after successful login.
+                        SharedPreferences customerPref = getSharedPreferences(
+                                "ca.cc.fito.mapd711_assign3_onlinepurchaseapp_preferences", MODE_PRIVATE);
+                        SharedPreferences.Editor customerEditor = customerPref.edit();
+                        customerEditor.putString("usernamePref",
+                                ((EditText) findViewById(R.id.etUsername)).getText().toString());
+                        customerEditor.commit();
 
+                        Intent i = new Intent("ca.cc.fito.mapd711_assign3_onlinepurchaseapp.StaffActivity");
+                        startActivity(i);
+                    }
                 } else {
                     display.setText(
                             "Username or Password incorrect. Please try: \n" +
@@ -245,9 +284,12 @@ public class MainActivity extends Activity
                                     "EMPLOYEE: Username='300960367', Password='secret' \n");
                 }
 
+/**/
+
             };
         });
     }
+/*
     public void onClickLoad(View view) {
         Intent i = new Intent("ca.cc.fito.mapd711_assign3_onlinepurchaseapp.PreferencesActivity");
         startActivity(i);
@@ -273,6 +315,6 @@ public class MainActivity extends Activity
     private void DisplayText(String str) {
         Toast.makeText(getBaseContext(), str, Toast.LENGTH_LONG).show();
     }
-
+*/
 }
 
