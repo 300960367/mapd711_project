@@ -131,7 +131,7 @@ public class MainActivity extends Activity
         <item>Bakery: Cheescake (1 unit) - $12.00V</item>
 */
 /*
-                // Update Product
+         // Add Product
 
                 List table = db.getTable("tblProduct");
                 record[1] = "Broccoli"; //productname
@@ -139,7 +139,7 @@ public class MainActivity extends Activity
                 record[3] = "1 kg";      //quantity
                 record[4] = "Veggie";       //category
                 ContentValues values = new ContentValues();
-                db.updateRecord(values, "tblProduct", fields,record);
+                db.addRecord(values, "tblProduct", fields,record);
 */
 /*
     <string-array name="shoppingItem">
@@ -266,7 +266,7 @@ public class MainActivity extends Activity
                 }
 
                 if (outUsername != "") {
-                    display.setText("Username: " + outUsername + ", Password: " + outPassword + ", Table: " + outTable);
+                    //display.setText("Username: " + outUsername + ", Password: " + outPassword + ", Table: " + outTable);
 
                     // a. Main activity with two login options one for customers and other one for shipment clerk.
                     if (outTable == "Customer") {
