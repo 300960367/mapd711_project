@@ -9,7 +9,6 @@ package ca.cc.fito.mapd711_assign3_onlinepurchaseapp;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -18,7 +17,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseManager extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "MySQLiteDB";
+//    private static final String DATABASE_NAME = "MySQLiteDB";
+    private static final String DATABASE_NAME = "SQLiteDB";
     private static final int DATABASE_VERSION = 1;
 
     private String tables[]; //table names

@@ -2,6 +2,7 @@ package ca.cc.fito.mapd711_assign3_onlinepurchaseapp;
 
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -41,25 +43,23 @@ public class OrderActivity extends AppCompatActivity {
         Button btnUpdateOrder = (Button) findViewById(R.id.btnUpdateOrder);
         Button btnListProducts = (Button) findViewById(R.id.btnListProducts);
 
-        listItems = getResources().getStringArray(R.array.shoppingItem);
-        checkedItems = new boolean[listItems.length];
+//        listItems = getResources().getStringArray(R.array.shoppingItem);
+//        checkedItems = new boolean[listItems.length];
 
         btnListProducts.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-            public void onClick(View view)
-            {
+            @Override
+            public void onClick(View view) {
                 List table = db.getTable("tblProduct");
 
                 for (Object o : table) {
-                    ArrayList row = (ArrayList)o;
+                    ArrayList row = (ArrayList) o;
                     // Writing table to log
                     String output = "";
-                    for (int i=0;i<row.size();i+=5)
-                    {
+                    for (int i = 0; i < row.size(); i += 5) {
                         output += row.get(i).toString() + ": ";
-                        output += row.get(i+1).toString() + " (";
-                        output += row.get(i+3).toString() + ") - $";
-                        output += row.get(i+2).toString();
+                        output += row.get(i + 1).toString() + " (";
+                        output += row.get(i + 3).toString() + ") - $";
+                        output += row.get(i + 2).toString();
                         output += "\n";
                     }
                     tvOrder.setText(output);
@@ -68,25 +68,26 @@ public class OrderActivity extends AppCompatActivity {
         });
 
         btnAddOrder.setOnClickListener(new View.OnClickListener() {
-           public void onClick(View view){
-               //--- Add order ---
-               final String fields[] = {"order_id", "customer_id", "product_id", "employee_id", "order_date", "status"};
-               final String record[] = new String[6];
+            public void onClick(View view) {
+                //--- Add order ---
+                final String fields[] = {"order_id", "customer_id", "product_id", "employee_id", "order_date", "status"};
+                final String record[] = new String[6];
 
-               //--- Get current date and time ---
-               calendar = Calendar.getInstance();
-               simpleDateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
-               Date = simpleDateFormat.format(calendar.getTime());
+                //--- Get current date and time ---
+                calendar = Calendar.getInstance();
+                simpleDateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+                Date = simpleDateFormat.format(calendar.getTime());
 
-               //--- Add order fields ---
-               record[1] = "1"; //customer_id
-               record[2] = etProductNumber.getText().toString(); //product_id
-               record[3] = "1"; //employee_id
-               record[4] = Date; //order_date
-               record[5] = "In-Process"; //status
-               ContentValues values = new ContentValues();
-               db.addRecord(values, "tblOrder", fields, record);
-           }
+                //--- Add order fields ---
+                record[1] = "1"; //customer_id
+                record[2] = etProductNumber.getText().toString(); //product_id
+                record[3] = "1"; //employee_id
+                record[4] = Date; //order_date
+                record[5] = "In-Process"; //status
+                ContentValues values = new ContentValues();
+                db.addRecord(values, "tblOrder", fields, record);
+                Toast.makeText(getBaseContext(), "Order added successfully", Toast.LENGTH_LONG).show();
+            }
         });
 
 
@@ -97,19 +98,19 @@ public class OrderActivity extends AppCompatActivity {
                 List table = db.getTable("tblOrder");
 
                 for (Object o : table) {
-                    ArrayList row = (ArrayList)o;
+                    ArrayList row = (ArrayList) o;
                     // Writing table to log
                     String output = "";
-                    //for (int i=0;i<row.size();i+=6)
-                    for (int i=0;i<row.size();i++)
+                    for (int i = 0; i < row.size(); i += 6)
+//                    for (int i=0;i<row.size();i++)
                     {
-                        output += row.get(i).toString();
-/*
-                        output += row.get(i+4).toString();
-                        output += " - " + row.get(i+5).toString();
+//                        output += row.get(i).toString();
+
+                        output += row.get(i + 4).toString();
+                        output += " - " + row.get(i + 5).toString();
                         output += ": Order #" + row.get(i).toString();
-                        output += " - Item #" + row.get(i+2).toString() + "\n";
-*/
+                        output += " - Item #" + row.get(i + 2).toString() + "\n";
+
 /*
                         output += "Order ID: " + row.get(i).toString() + "\n";
                         output += "Customer ID: " + row.get(i+1).toString() + "\n";
@@ -118,6 +119,7 @@ public class OrderActivity extends AppCompatActivity {
                         output += "Order Date: " + row.get(i+4).toString() + "\n";
                         output += "Status: " + row.get(i+5).toString() + "\n";
 */
+
                     }
                     tvOrder.setText(output);
                 }
@@ -125,14 +127,18 @@ public class OrderActivity extends AppCompatActivity {
             }
         });
 
+
         btnUpdateOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //--- Add order ---
+                Toast.makeText(getBaseContext(), "Sorry, under development", Toast.LENGTH_LONG).show();
+
+/*
+                //--- Update order ---
                 final String fields[] = {"order_id", "customer_id", "product_id", "employee_id", "order_date", "status"};
                 final String record[] = new String[6];
 
-                List table = db.getTable("tblOrder");
+                //List table = db.getTable("tblOrder");
                 record[0] = etOrderNumber.getText().toString(); // order_id
                 record[1] = "1"; //customer_id
                 record[2] = etProductNumber.getText().toString(); //product_id
@@ -141,7 +147,9 @@ public class OrderActivity extends AppCompatActivity {
                 record[5] = "In-Process"; //status
                 ContentValues values = new ContentValues();
                 db.updateRecord(values, "tblOrder", fields, record);
+*/
             }
+
         });
 
         btnOrder.setOnClickListener(new View.OnClickListener() {
@@ -166,7 +174,7 @@ public class OrderActivity extends AppCompatActivity {
                 mBuilder.setPositiveButton(R.string.ok_label, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String item = "" ;
+                        String item = "";
                         for (int i = 0; i < userItems.size(); i++) {
                             item = item + listItems[userItems.get(i)];
                             if (i != userItems.size() - 1) {
@@ -187,11 +195,11 @@ public class OrderActivity extends AppCompatActivity {
                 mBuilder.setNeutralButton(R.string.clear_all_label, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        for (int i=0; i < checkedItems.length;  i++) {
+                        for (int i = 0; i < checkedItems.length; i++) {
                             checkedItems[i] = false;
                             userItems.clear();
-                                tvOrder.setText("");
-                            }
+                            tvOrder.setText("");
+                        }
                     }
                 });
 
@@ -199,6 +207,17 @@ public class OrderActivity extends AppCompatActivity {
                 mDialog.show();
             }
         });
-
     }
+
+    public void onClickDisplay(View view) {
+        SharedPreferences appPrefs = getSharedPreferences(
+                "ca.cc.fito.mapd711_assign3_onlinepurchaseapp_preferences", MODE_PRIVATE);
+        DisplayText(appPrefs.getString("usernamePref", ""));
+    }
+
+    private void DisplayText(String str) {
+        Toast.makeText(getBaseContext(), str, Toast.LENGTH_LONG).show();
+    }
+
 }
+

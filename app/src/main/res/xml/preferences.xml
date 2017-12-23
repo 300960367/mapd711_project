@@ -9,8 +9,9 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-          tools:layout_editor_absoluteY="81dp">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
     <PreferenceCategory android:title="Category 1">
         <CheckBoxPreference
             android:title="Checkbox"

@@ -11,7 +11,7 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import java.util.List;
 
-public class CustomerActivity extends PreferenceActivity {
+public class PreferencesActivity extends PreferenceActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

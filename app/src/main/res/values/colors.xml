@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#294273</color>
+    <color name="colorPrimary">#000000</color>
     <color name="colorPrimaryDark">#032059</color>
     <color name="colorAccent">#4b69A6</color>
     <!-- Green -->
@@ -9,9 +9,7 @@
     <color name="customerAccent">#72C096</color>
 
     <!-- Light Blue -->
-    <!--
-    <color name="customerPrimary">#9FADBF</color>
-    <color name="customerPrimaryDark">#A3B2BF</color>
-    <color name="customerAccent">#BAC8D9</color>
-      -->
+    <color name="staffPrimary">#9FADBF</color>
+    <color name="staffPrimaryDark">#A3B2BF</color>
+    <color name="staffAccent">#BAC8D9</color>
 </resources>

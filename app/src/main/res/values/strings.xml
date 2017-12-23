@@ -1,3 +1,22 @@
 <resources>
-    <string name="app_name">mapd711_assign3_onlinepurchaseapp</string>
+    <string name="app_name">Online Purchase Application</string>
+    <string name="customer_title">Order Product</string>
+    <string name="staff_title">Check Orders</string>
+    <string name="quick_registry_title">Quick Registry</string>
+    <string name="dialog_title">Items Available in a Shop</string>
+    <string name="ok_label">OK</string>
+    <string name="dismiss_label">Dismiss</string>
+    <string name="clear_all_label">Clear all</string>
+    <string-array name="shoppingItem">
+        <item>1: Lemons Product of Spain (1 kg) - $0.50</item>
+        <item>2: Garlic Product of China (5 count) - $0.67</item>
+        <item>3: Fresh Chicken Leg Quarters (1 unit) - $7.00</item>
+        <item>4: Frozen Halal Turkey (1 unit) - $2.99</item>
+        <item>5: Dinner Rolls (24 unit)</item>
+        <item>6: Cheescake (1 unit) - $12.00</item>
+        <item>7: Muzzarella Balls (260 g) - $2.49</item>
+        <item>8: Blackberries (170 g) - $2.49</item>
+        <item>9: Green Bell Peppers (1 kg) - $4.29</item>
+        <item>10: Broccoli (1 kg) - $1.29</item>
+    </string-array>
 </resources>
