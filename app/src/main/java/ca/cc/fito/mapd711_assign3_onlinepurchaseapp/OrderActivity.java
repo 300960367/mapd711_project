@@ -6,6 +6,7 @@ package ca.cc.fito.mapd711_assign3_onlinepurchaseapp;
 
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -51,8 +52,10 @@ public class OrderActivity extends AppCompatActivity {
         final DatabaseManager db = new DatabaseManager(this);
         final EditText etOrderNumber = (EditText) findViewById(R.id.etOrderNumber);
         final EditText etProductNumber = (EditText) findViewById(R.id.etProductNumber);
+        final TextView tvGreetings1 = (TextView) findViewById(R.id.tvGreetings1);
         final TextView tvOrder = (TextView) findViewById(R.id.tvOrder);
-        btnOrder = (Button) findViewById(R.id.btnOrder);
+        final TextView tvShowPreferences = (TextView) findViewById(R.id.tvShowPreferences);
+//        btnOrder = (Button) findViewById(R.id.btnOrder);
         Button btnAddOrder = (Button) findViewById(R.id.btnAddOrder);
         Button btnViewOrder = (Button) findViewById(R.id.btnViewOrder);
         Button btnUpdateOrder = (Button) findViewById(R.id.btnUpdateOrder);
@@ -60,6 +63,7 @@ public class OrderActivity extends AppCompatActivity {
 
 //        listItems = getResources().getStringArray(R.array.shoppingItem);
 //        checkedItems = new boolean[listItems.length];
+        tvGreetings1.setText("Hello " + firstnamePref + "!");
 
         btnListProducts.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,7 +136,6 @@ public class OrderActivity extends AppCompatActivity {
             }
         });
 
-
         btnUpdateOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -157,7 +160,7 @@ public class OrderActivity extends AppCompatActivity {
             }
 
         });
-
+/*
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -213,15 +216,17 @@ public class OrderActivity extends AppCompatActivity {
                 mDialog.show();
             }
         });
-    }
+*/
 
-    public void onClickDisplay(View view) {
-//        SharedPreferences appPrefs = getSharedPreferences(
-//                "ca.cc.fito.mapd711_assign3_onlinepurchaseapp_preferences", MODE_PRIVATE);
-        DisplayText("ID #" + useridPref + "\n" +
+        tvShowPreferences.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DisplayText("ID #" + useridPref + "\n" +
                         "Username: " + usernamePref + "\n" +
                         "Firstname: " + firstnamePref + "\n" +
                         "Lastname: " + lastnamePref + "\n");
+            }
+        });
     }
 
     private void DisplayText(String str) {

@@ -15,126 +15,127 @@
     tools:context="ca.cc.fito.mapd711_assign3_onlinepurchaseapp.OrderActivity"
     tools:layout_editor_absoluteY="81dp">
 
-    <Button
-        android:id="@+id/btnOrder"
-        android:layout_width="143dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="16dp"
-        android:text="Select Products"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="484dp" />
-
     <TextView
         android:id="@+id/tvOrder"
         android:layout_width="0dp"
-        android:layout_height="220dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="58dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:textColor="@color/colorPrimary"
         android:textSize="14sp"
         android:textStyle="italic"
         android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnViewOrder" />
+        app:layout_constraintTop_toBottomOf="@+id/tvGreetings1" />
 
     <Button
         android:id="@+id/btnListProducts"
-        android:layout_width="143dp"
+        android:layout_width="0dp"
         android:layout_height="44dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="List Products"
-        app:layout_constraintEnd_toStartOf="@+id/btnListPreferences"
+        app:layout_constraintBottom_toTopOf="@+id/tvOrder"
+        app:layout_constraintEnd_toStartOf="@+id/btnViewOrder"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvOrder" />
+        app:layout_constraintTop_toBottomOf="@+id/etOrderNumber" />
 
     <Button
         android:id="@+id/btnViewOrder"
-        android:layout_width="104dp"
+        android:layout_width="0dp"
         android:layout_height="44dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="View"
-        app:layout_constraintEnd_toStartOf="@+id/btnUpdateOrder"
-        app:layout_constraintStart_toEndOf="@+id/btnAddOrder"
-        app:layout_constraintTop_toBottomOf="@+id/etProductNumber" />
+        android:layout_marginTop="8dp"
+        android:text="List Orders"
+        app:layout_constraintBottom_toTopOf="@+id/tvOrder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnListProducts"
+        app:layout_constraintTop_toBottomOf="@+id/btnUpdateOrder" />
 
     <Button
         android:id="@+id/btnAddOrder"
-        android:layout_width="88dp"
+        android:layout_width="100dp"
         android:layout_height="44dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="Add"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etProductNumber" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/etProductNumber"
+        app:layout_constraintTop_toBottomOf="@+id/tvGreetings1" />
 
     <Button
         android:id="@+id/btnUpdateOrder"
-        android:layout_width="112dp"
+        android:layout_width="100dp"
         android:layout_height="44dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="Update"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etProductNumber" />
+        app:layout_constraintStart_toEndOf="@+id/etOrderNumber"
+        app:layout_constraintTop_toBottomOf="@+id/btnAddOrder" />
 
     <EditText
         android:id="@+id/etProductNumber"
-        android:layout_width="352dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Product #"
         android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etOrderNumber" />
+        app:layout_constraintTop_toBottomOf="@+id/tvGreetings1" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="352dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="8dp"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimary"
-        android:textSize="18sp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="16dp" />
-
-    <EditText
-        android:id="@+id/etOrderNumber"
-        android:layout_width="352dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="Order #"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <Button
-        android:id="@+id/btnListPreferences"
+        android:id="@+id/tvGreetings1"
         android:layout_width="0dp"
-        android:layout_height="44dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="200dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:onClick="onClickDisplay"
-        android:text="List Preferences"
+        android:textAlignment="textStart"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@+id/tvOrder"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnOrder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etOrderNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Order #"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etProductNumber" />
+
+    <TextView
+        android:id="@+id/tvShowPreferences"
+        android:layout_width="349dp"
+        android:layout_height="22dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Show Preferences"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvOrder" />
 
 </android.support.constraint.ConstraintLayout>

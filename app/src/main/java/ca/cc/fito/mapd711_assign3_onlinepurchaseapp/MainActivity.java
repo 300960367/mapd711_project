@@ -80,8 +80,8 @@ public class MainActivity extends Activity
         //--- Add customer ---
         final String fields[] = {"customer_id", "username", "password", "firstname", "lastname", "address", "city", "postal_code"};
         final String record[] = new String[8];
-
 */
+
 /*
         //--- Add employee ---
         final String fields[] = {"employee_id", "username", "password", "firstname", "lastname"};
@@ -119,9 +119,14 @@ public class MainActivity extends Activity
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 /*
-                db.deleteRecord("tblCustomer", "customer_id", "5");
+            // Delete n records
+            String txt = "";
+
+            for (int i=3; i<17; i++) {
+                txt = String.valueOf(i);
+                db.deleteRecord("tblCustomer", "customer_id", txt);
+            }
 */
 /*
         <item>Produce: Garlic Product of China (5 count) - $0.67 - Produce</item>
@@ -254,7 +259,6 @@ public class MainActivity extends Activity
                         }
                     }
 
-
                 table = db.getTable("tblEmployee");
 
                 for (Object o : table) {
@@ -287,27 +291,9 @@ public class MainActivity extends Activity
 
                     // a. Main activity with two login options one for customers and other one for shipment clerk.
                     if (outTable == "Customer") {
-/*
-                        // b. Customers and Clerks username will be stored in Shared Preferences after successful login.
-                        SharedPreferences customerPref = getSharedPreferences(
-                                "ca.cc.fito.mapd711_assign3_onlinepurchaseapp_preferences", MODE_PRIVATE);
-                        SharedPreferences.Editor customerEditor = customerPref.edit();
-                        customerEditor.putString("usernamePref",
-                                ((EditText) findViewById(R.id.etUsername)).getText().toString());
-                        customerEditor.commit();
-*/
                         Intent i = new Intent("ca.cc.fito.mapd711_assign3_onlinepurchaseapp.OrderActivity");
                         startActivity(i);
                     } else {
-/*
-                        // b. Customers and Clerks username will be stored in Shared Preferences after successful login.
-                        SharedPreferences customerPref = getSharedPreferences(
-                                "ca.cc.fito.mapd711_assign3_onlinepurchaseapp_preferences", MODE_PRIVATE);
-                        SharedPreferences.Editor customerEditor = customerPref.edit();
-                        customerEditor.putString("usernamePref",
-                                ((EditText) findViewById(R.id.etUsername)).getText().toString());
-                        customerEditor.commit();
-*/
                         Intent i = new Intent("ca.cc.fito.mapd711_assign3_onlinepurchaseapp.StaffActivity");
                         startActivity(i);
                     }

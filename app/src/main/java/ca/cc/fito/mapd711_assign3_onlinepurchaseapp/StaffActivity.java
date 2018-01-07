@@ -6,6 +6,7 @@ package ca.cc.fito.mapd711_assign3_onlinepurchaseapp;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,19 +25,27 @@ public class StaffActivity extends AppCompatActivity {
     Calendar calendar;
     SimpleDateFormat simpleDateFormat;
     String strDate;
+    String firstnamePref = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_staff);
 
+        final SharedPreferences appPrefs = getSharedPreferences(
+                "ca.cc.fito.mapd711_assign3_onlinepurchaseapp_preferences", MODE_PRIVATE);
+        firstnamePref = appPrefs.getString("firstnamePref", "");
+
         final DatabaseManager db = new DatabaseManager(this);
         final EditText etCheckOrderNumber = (EditText) findViewById(R.id.etCheckOrderNumber);
         final EditText etProductNumber = (EditText) findViewById(R.id.etProductNumber);
+        final TextView tvGreetings = (TextView) findViewById(R.id.tvGreetings);
         final TextView tvAllOrders = (TextView) findViewById(R.id.tvAllOrders);
         final TextView tvQuickRegistry = (TextView) findViewById(R.id.tvQuickRegistry);
         Button btnCheckListOrders = (Button) findViewById(R.id.btnCheckListOrders);
         Button btnUpdateStatus = (Button) findViewById(R.id.btnUpdateStatus);
+
+        tvGreetings.setText("Hello " + firstnamePref + "!");
 
         btnCheckListOrders.setOnClickListener(new View.OnClickListener() {
             @Override
