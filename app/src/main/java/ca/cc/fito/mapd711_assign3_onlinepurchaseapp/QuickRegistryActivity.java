@@ -56,7 +56,7 @@ public class QuickRegistryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(QuickRegistryActivity.this, "Table set to: " + rb.getText().toString(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(QuickRegistryActivity.this, "Table set to: " + rb.getText().toString(), Toast.LENGTH_SHORT).show();
 
                 switch(rb.getText().toString()){
 
@@ -73,7 +73,7 @@ public class QuickRegistryActivity extends AppCompatActivity {
                         db.addRecord(valuesCustomer, "tblCustomer", fieldsCustomer, recordCustomer);
 
                         Toast.makeText(QuickRegistryActivity.this,
-                                "Table: " + rb.getText().toString() + "\n" +
+                               "Table: " + rb.getText().toString() + "\n" +
                                         "username: " + editText1.getText().toString() + "\n" +
                                         "password: " + editText2.getText().toString() + "\n" +
                                         "firstname: " + editText3.getText().toString() + "\n" +
@@ -133,7 +133,7 @@ public class QuickRegistryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(QuickRegistryActivity.this, "Table set to: " + rb.getText().toString(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(QuickRegistryActivity.this, "Table set to: " + rb.getText().toString(), Toast.LENGTH_SHORT).show();
 
                 switch(rb.getText().toString()){
 
