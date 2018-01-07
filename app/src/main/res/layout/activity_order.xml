@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--
+/* MAPD 711 - Final Project - Online Purchase App */
+/* KIDS team - 1/06/2018                          */
+/* activity_order.xml                             */
+-->
+
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -26,8 +33,6 @@
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:textAlignment="viewStart"
         android:textColor="@color/colorPrimary"
         android:textSize="14sp"
         android:textStyle="italic"

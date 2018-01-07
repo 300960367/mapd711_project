@@ -1,5 +1,9 @@
 package ca.cc.fito.mapd711_assign3_onlinepurchaseapp;
 
+/* MAPD 711 - Final Project - Online Purchase App */
+/* KIDS team - 1/06/2018                          */
+/* OrderActivity.java                             */
+
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -23,15 +27,26 @@ public class OrderActivity extends AppCompatActivity {
     boolean[] checkedItems;
     ArrayList<Integer> userItems = new ArrayList<>();
     Button btnOrder;
+    String useridPref = "";
+    String usernamePref = "";
+    String firstnamePref = "";
+    String lastnamePref = "";
 
     Calendar calendar;
     SimpleDateFormat simpleDateFormat;
-    String Date;
+    String strDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
+
+        final SharedPreferences appPrefs = getSharedPreferences(
+                "ca.cc.fito.mapd711_assign3_onlinepurchaseapp_preferences", MODE_PRIVATE);
+        useridPref = appPrefs.getString("useridPref", "");
+        usernamePref = appPrefs.getString("usernamePref", "");
+        firstnamePref = appPrefs.getString("firstnamePref", "");
+        lastnamePref = appPrefs.getString("lastnamePref", "");
 
         final DatabaseManager db = new DatabaseManager(this);
         final EditText etOrderNumber = (EditText) findViewById(R.id.etOrderNumber);
@@ -76,13 +91,13 @@ public class OrderActivity extends AppCompatActivity {
                 //--- Get current date and time ---
                 calendar = Calendar.getInstance();
                 simpleDateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
-                Date = simpleDateFormat.format(calendar.getTime());
+                strDate = simpleDateFormat.format(calendar.getTime());
 
                 //--- Add order fields ---
-                record[1] = "1"; //customer_id
+                record[1] = useridPref; //customer_id
                 record[2] = etProductNumber.getText().toString(); //product_id
                 record[3] = "1"; //employee_id
-                record[4] = Date; //order_date
+                record[4] = strDate; //order_date
                 record[5] = "In-Process"; //status
                 ContentValues values = new ContentValues();
                 db.addRecord(values, "tblOrder", fields, record);
@@ -131,23 +146,24 @@ public class OrderActivity extends AppCompatActivity {
         btnUpdateOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getBaseContext(), "Sorry, under development", Toast.LENGTH_LONG).show();
-
-/*
                 //--- Update order ---
                 final String fields[] = {"order_id", "customer_id", "product_id", "employee_id", "order_date", "status"};
                 final String record[] = new String[6];
 
+                calendar = Calendar.getInstance();
+                simpleDateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+                strDate = simpleDateFormat.format(calendar.getTime());
+
                 //List table = db.getTable("tblOrder");
                 record[0] = etOrderNumber.getText().toString(); // order_id
-                record[1] = "1"; //customer_id
+                record[1] = useridPref; //customer_id
                 record[2] = etProductNumber.getText().toString(); //product_id
                 record[3] = "1"; //employee_id
-                record[4] = Date; //order_date
+                record[4] = strDate;
                 record[5] = "In-Process"; //status
                 ContentValues values = new ContentValues();
                 db.updateRecord(values, "tblOrder", fields, record);
-*/
+
             }
 
         });
@@ -210,9 +226,12 @@ public class OrderActivity extends AppCompatActivity {
     }
 
     public void onClickDisplay(View view) {
-        SharedPreferences appPrefs = getSharedPreferences(
-                "ca.cc.fito.mapd711_assign3_onlinepurchaseapp_preferences", MODE_PRIVATE);
-        DisplayText(appPrefs.getString("usernamePref", ""));
+//        SharedPreferences appPrefs = getSharedPreferences(
+//                "ca.cc.fito.mapd711_assign3_onlinepurchaseapp_preferences", MODE_PRIVATE);
+        DisplayText("ID #" + useridPref + "\n" +
+                        "Username: " + usernamePref + "\n" +
+                        "Firstname: " + firstnamePref + "\n" +
+                        "Lastname: " + lastnamePref + "\n");
     }
 
     private void DisplayText(String str) {

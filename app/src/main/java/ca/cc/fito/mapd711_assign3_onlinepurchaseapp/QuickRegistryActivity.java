@@ -1,5 +1,9 @@
 package ca.cc.fito.mapd711_assign3_onlinepurchaseapp;
 
+/* MAPD 711 - Final Project - Online Purchase App */
+/* KIDS team - 1/06/2018                          */
+/* QuickRegistryActivity.java                     */
+
 import android.content.ContentValues;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

@@ -1,9 +1,8 @@
 package ca.cc.fito.mapd711_assign3_onlinepurchaseapp;
 
-/* MAPD 711 - Assignment 3 - Online Purchase App */
-/* 12/16/2017                                    */
-/* Fernando Ito - 300960367                      */
-/* Santhosh Damodharan - 300964037               */
+/* MAPD 711 - Final Project - Online Purchase App */
+/* KIDS team - 1/06/2018                          */
+/* PreferencesActivity.java                       */
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;

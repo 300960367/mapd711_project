@@ -1,9 +1,8 @@
 package ca.cc.fito.mapd711_assign3_onlinepurchaseapp;
 
-/* MAPD 711 - Assignment 3 - Online Purchase App */
-/* 12/16/2017                                    */
-/* Fernando Ito - 300960367                      */
-/* Santhosh Damodharan - 300964037               */
+/* MAPD 711 - Final Project - Online Purchase App */
+/* KIDS team - 1/06/2018                          */
+/* MainActivity.java                              */
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -38,34 +37,34 @@ public class MainActivity extends Activity
     private static final String tables[]={"tblCustomer","tblEmployee", "tblProduct", "tblOrder"};
     private static final String tableCreatorString[] =
             {
-            "CREATE TABLE tblCustomer (" +
-                    "customer_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "username TEXT, " +
-                    "password TEXT, " +
-                    "firstname TEXT, " +
-                    "lastname TEXT, " +
-                    "address TEXT, " +
-                    "city TEXT, " +
-                    "postal_code TEXT);",
-            "CREATE TABLE tblEmployee (" +
-                    "employee_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "username TEXT, " +
-                    "password TEXT, " +
-                    "firstname TEXT, " +
-                    "lastname TEXT);",
-            "CREATE TABLE tblProduct (" +
-                    "product_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "productname TEXT, " +
-                    "price TEXT, " +
-                    "quantity TEXT, " +
-                    "category TEXT);",
-            "CREATE TABLE tblOrder (" +
-                    "order_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "customer_id TEXT, " +
-                    "product_id TEXT, " +
-                    "employee_id TEXT, " +
-                    "order_date TEXT, " +
-                    "status TEXT);"
+                    "CREATE TABLE tblCustomer (" +
+                            "customer_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                            "username TEXT, " +
+                            "password TEXT, " +
+                            "firstname TEXT, " +
+                            "lastname TEXT, " +
+                            "address TEXT, " +
+                            "city TEXT, " +
+                            "postal_code TEXT);",
+                    "CREATE TABLE tblEmployee (" +
+                            "employee_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                            "username TEXT, " +
+                            "password TEXT, " +
+                            "firstname TEXT, " +
+                            "lastname TEXT);",
+                    "CREATE TABLE tblProduct (" +
+                            "product_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                            "productname TEXT, " +
+                            "price TEXT, " +
+                            "quantity TEXT, " +
+                            "category TEXT);",
+                    "CREATE TABLE tblOrder (" +
+                            "order_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                            "customer_id TEXT, " +
+                            "product_id TEXT, " +
+                            "employee_id TEXT, " +
+                            "order_date TEXT, " +
+                            "status TEXT);"
             };
 
     @Override
@@ -230,9 +229,11 @@ public class MainActivity extends Activity
 
 
 
-
-                String outUsername = "";
-                String outPassword = "";
+                String useridPref = "";
+                String usernamePref = "";
+                String passwordPref = "";
+                String firstnamePref = "";
+                String lastnamePref = "";
                 String outTable = "";
 
                 //--- Validate username, password and type of user (Customer or Employee) ---
@@ -240,11 +241,14 @@ public class MainActivity extends Activity
 
                     for (Object o : table) {
                         ArrayList row = (ArrayList) o;
-                        for (int x=1; x<row.size(); x+=8) {
-                            if (row.get(x).toString().equals(etUsername.getText().toString()) &&
-                                    row.get(x+1).toString().equals(etPassword.getText().toString())) {
-                                outUsername = row.get(x).toString();
-                                outPassword = row.get(x+1).toString();
+                        for (int x=0; x<row.size(); x+=8) {
+                            if (row.get(x+1).toString().equals(etUsername.getText().toString()) &&
+                                    row.get(x+2).toString().equals(etPassword.getText().toString())) {
+                                useridPref = row.get(x).toString();
+                                usernamePref = row.get(x+1).toString();
+                                passwordPref = row.get(x+2).toString();
+                                firstnamePref = row.get(x+3).toString();
+                                lastnamePref = row.get(x+4).toString();
                                 outTable = "Customer";
                             }
                         }
@@ -255,21 +259,35 @@ public class MainActivity extends Activity
 
                 for (Object o : table) {
                     ArrayList row = (ArrayList) o;
-                    for (int x=1; x<row.size(); x+=5) {
-                        if (row.get(x).toString().equals(etUsername.getText().toString()) &&
-                                row.get(x+1).toString().equals(etPassword.getText().toString())) {
-                            outUsername = row.get(x).toString();
-                            outPassword = row.get(x+1).toString();
+                    for (int x=0; x<row.size(); x+=5) {
+                        if (row.get(x+1).toString().equals(etUsername.getText().toString()) &&
+                                row.get(x+2).toString().equals(etPassword.getText().toString())) {
+                            useridPref = row.get(x).toString();
+                            usernamePref = row.get(x+1).toString();
+                            passwordPref = row.get(x+2).toString();
+                            firstnamePref = row.get(x+3).toString();
+                            lastnamePref = row.get(x+4).toString();
                             outTable = "Staff";
                         }
                     }
                 }
 
-                if (outUsername != "") {
-                    //display.setText("Username: " + outUsername + ", Password: " + outPassword + ", Table: " + outTable);
+                if (usernamePref != "") {
+                    //display.setText("Username: " + usernamePref + ", Password: " + passwordPref + ", Table: " + outTable);
+
+                    // b. Customers and Clerks username will be stored in Shared Preferences after successful login.
+                    SharedPreferences customerPref = getSharedPreferences(
+                            "ca.cc.fito.mapd711_assign3_onlinepurchaseapp_preferences", MODE_PRIVATE);
+                    SharedPreferences.Editor customerEditor = customerPref.edit();
+                    customerEditor.putString("useridPref", useridPref);
+                    customerEditor.putString("usernamePref", usernamePref);
+                    customerEditor.putString("firstnamePref", firstnamePref);
+                    customerEditor.putString("lastnamePref", lastnamePref);
+                    customerEditor.commit();
 
                     // a. Main activity with two login options one for customers and other one for shipment clerk.
                     if (outTable == "Customer") {
+/*
                         // b. Customers and Clerks username will be stored in Shared Preferences after successful login.
                         SharedPreferences customerPref = getSharedPreferences(
                                 "ca.cc.fito.mapd711_assign3_onlinepurchaseapp_preferences", MODE_PRIVATE);
@@ -277,10 +295,11 @@ public class MainActivity extends Activity
                         customerEditor.putString("usernamePref",
                                 ((EditText) findViewById(R.id.etUsername)).getText().toString());
                         customerEditor.commit();
-
+*/
                         Intent i = new Intent("ca.cc.fito.mapd711_assign3_onlinepurchaseapp.OrderActivity");
                         startActivity(i);
                     } else {
+/*
                         // b. Customers and Clerks username will be stored in Shared Preferences after successful login.
                         SharedPreferences customerPref = getSharedPreferences(
                                 "ca.cc.fito.mapd711_assign3_onlinepurchaseapp_preferences", MODE_PRIVATE);
@@ -288,7 +307,7 @@ public class MainActivity extends Activity
                         customerEditor.putString("usernamePref",
                                 ((EditText) findViewById(R.id.etUsername)).getText().toString());
                         customerEditor.commit();
-
+*/
                         Intent i = new Intent("ca.cc.fito.mapd711_assign3_onlinepurchaseapp.StaffActivity");
                         startActivity(i);
                     }
@@ -300,6 +319,10 @@ public class MainActivity extends Activity
                 }
 
 /**/
+
+
+
+
 
             };
         });

@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--
+/* MAPD 711 - Final Project - Online Purchase App */
+/* KIDS team - 1/06/2018                          */
+/* colors.xml                              */
+-->
+
 <resources>
     <color name="colorPrimary">#000000</color>
     <color name="colorPrimaryDark">#032059</color>
@@ -8,8 +15,8 @@
     <color name="customerPrimaryDark">#158E4B</color>
     <color name="customerAccent">#72C096</color>
 
-    <!-- Light Blue -->
-    <color name="staffPrimary">#9FADBF</color>
-    <color name="staffPrimaryDark">#A3B2BF</color>
+    <!-- Light Grey -->
+    <color name="staffPrimary">#A3B2BF</color>
+    <color name="staffPrimaryDark">#9FADBF</color>
     <color name="staffAccent">#BAC8D9</color>
 </resources>

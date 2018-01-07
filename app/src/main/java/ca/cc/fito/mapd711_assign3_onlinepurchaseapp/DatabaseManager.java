@@ -1,9 +1,8 @@
 package ca.cc.fito.mapd711_assign3_onlinepurchaseapp;
 
-/* MAPD 711 - Assignment 3 - Online Purchase App */
-/* 12/17/2017                                    */
-/* Fernando Ito - 300960367                      */
-/* Santhosh Damodharan - 300964037               */
+/* MAPD 711 - Final Project - Online Purchase App */
+/* KIDS team - 1/06/2018                          */
+/* DatabaseManager.java                           */
 
 
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
 //    private static final String DATABASE_NAME = "MySQLiteDB";
     private static final String DATABASE_NAME = "SQLiteDB";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private String tables[]; //table names
     private String tableCreatorString[]; //SQL statements to create tables
@@ -92,7 +91,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public List getTable(String tableName) {
         List table = new ArrayList(); //to store all rows
         // Select all records
-        String selectQuery = "SELECT  * FROM " + tableName;
+        String selectQuery = "SELECT * FROM " + tableName;
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

@@ -1,3 +1,9 @@
+<!--
+/* MAPD 711 - Final Project - Online Purchase App */
+/* KIDS team - 1/06/2018                          */
+/* strings.xml                                    */
+-->
+
 <resources>
     <string name="app_name">Online Purchase Application</string>
     <string name="customer_title">Order Product</string>

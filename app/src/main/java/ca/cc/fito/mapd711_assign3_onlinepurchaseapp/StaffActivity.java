@@ -1,5 +1,10 @@
 package ca.cc.fito.mapd711_assign3_onlinepurchaseapp;
 
+/* MAPD 711 - Final Project - Online Purchase App */
+/* KIDS team - 1/06/2018                          */
+/* StaffActivity.java                             */
+
+import android.content.ContentValues;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,10 +14,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class StaffActivity extends AppCompatActivity {
+
+    Calendar calendar;
+    SimpleDateFormat simpleDateFormat;
+    String strDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +31,7 @@ public class StaffActivity extends AppCompatActivity {
         setContentView(R.layout.activity_staff);
 
         final DatabaseManager db = new DatabaseManager(this);
-        final EditText etOrderNumber = (EditText) findViewById(R.id.etCheckOrderNumber);
+        final EditText etCheckOrderNumber = (EditText) findViewById(R.id.etCheckOrderNumber);
         final EditText etProductNumber = (EditText) findViewById(R.id.etProductNumber);
         final TextView tvAllOrders = (TextView) findViewById(R.id.tvAllOrders);
         final TextView tvQuickRegistry = (TextView) findViewById(R.id.tvQuickRegistry);
@@ -61,11 +72,45 @@ public class StaffActivity extends AppCompatActivity {
             }
 
         });
-        btnCheckListOrders.setOnClickListener(new View.OnClickListener() {
+
+        btnUpdateStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //--- Update order ---
+                final String fields[] = {"order_id", "customer_id", "product_id", "employee_id", "order_date", "status"};
+                final String record[] = new String[6];
+
+                calendar = Calendar.getInstance();
+                simpleDateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+                strDate = simpleDateFormat.format(calendar.getTime());
+
+
                 List table = db.getTable("tblOrder");
-                Toast.makeText(getBaseContext(), "Sorry, under development", Toast.LENGTH_LONG).show();
+
+                for (Object o : table) {
+                    ArrayList row = (ArrayList) o;
+                    // Writing table to log
+                    String output = "";
+                    for (int i = 0; i < row.size(); i += 6)
+//                    for (int i=0;i<row.size();i++)
+                    {
+//                        output += row.get(i).toString();
+                        if (row.get(i).toString().equals(etCheckOrderNumber.getText().toString())) {
+                            record[0] = row.get(i).toString();
+                            record[1] = row.get(i+1).toString();
+                            record[2] = row.get(i+2).toString();
+                            record[3] = row.get(i+3).toString();
+                            record[4] = row.get(i+4).toString();
+                            record[5] = "Delivered";
+
+                            ContentValues values = new ContentValues();
+                            //db.updateRecord(values, "tblOrder", fields, record);
+                        }
+                        tvAllOrders.setText(row.get(i+1).toString());
+                    }
+                }
+
+
             }
         });
 
