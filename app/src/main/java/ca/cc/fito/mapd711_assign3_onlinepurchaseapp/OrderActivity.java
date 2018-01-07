@@ -117,23 +117,13 @@ public class OrderActivity extends AppCompatActivity {
                     // Writing table to log
                     String output = "";
                     for (int i = 0; i < row.size(); i += 6)
-//                    for (int i=0;i<row.size();i++)
                     {
-//                        output += row.get(i).toString();
-
-                        output += row.get(i + 4).toString();
-                        output += " - " + row.get(i + 5).toString();
-                        output += ": Order #" + row.get(i).toString();
-                        output += " - Item #" + row.get(i + 2).toString() + "\n";
-
-/*
-                        output += "Order ID: " + row.get(i).toString() + "\n";
-                        output += "Customer ID: " + row.get(i+1).toString() + "\n";
-                        output += "Product ID: " + row.get(i+2).toString() + "\n";
-                        output += "Employee ID: " + row.get(i+3).toString() + "\n";
-                        output += "Order Date: " + row.get(i+4).toString() + "\n";
-                        output += "Status: " + row.get(i+5).toString() + "\n";
-*/
+                        if (row.get( i+1 ).toString().equals(useridPref)) {
+                            output += "Order #" + row.get(i).toString();
+                            output += ": Item #" + row.get(i + 2).toString();
+                            output += " - " + row.get(i + 4).toString();
+                            output += " - " + row.get(i + 5).toString() + "\n";
+                        }
 
                     }
                     tvOrder.setText(output);

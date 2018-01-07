@@ -51,11 +51,10 @@ public class StaffActivity extends AppCompatActivity {
 //                    for (int i=0;i<row.size();i++)
                     {
 //                        output += row.get(i).toString();
-
-                        output += row.get(i + 4).toString();
-                        output += " - " + row.get(i + 5).toString();
-                        output += ": Order #" + row.get(i).toString();
-                        output += " - Item #" + row.get(i + 2).toString() + "\n";
+                        output += "Order #" + row.get(i).toString();
+                        output += " - Customer ID: " + row.get(i + 1).toString ();
+                        output += " - Item #" + row.get(i + 2).toString();
+                        output += " - " + row.get(i + 5).toString() + "\n";
 
 /*
                         output += "Order ID: " + row.get(i).toString() + "\n";
@@ -80,21 +79,12 @@ public class StaffActivity extends AppCompatActivity {
                 final String fields[] = {"order_id", "customer_id", "product_id", "employee_id", "order_date", "status"};
                 final String record[] = new String[6];
 
-                calendar = Calendar.getInstance();
-                simpleDateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
-                strDate = simpleDateFormat.format(calendar.getTime());
-
-
                 List table = db.getTable("tblOrder");
 
                 for (Object o : table) {
                     ArrayList row = (ArrayList) o;
-                    // Writing table to log
-                    String output = "";
                     for (int i = 0; i < row.size(); i += 6)
-//                    for (int i=0;i<row.size();i++)
                     {
-//                        output += row.get(i).toString();
                         if (row.get(i).toString().equals(etCheckOrderNumber.getText().toString())) {
                             record[0] = row.get(i).toString();
                             record[1] = row.get(i+1).toString();
@@ -104,13 +94,20 @@ public class StaffActivity extends AppCompatActivity {
                             record[5] = "Delivered";
 
                             ContentValues values = new ContentValues();
-                            //db.updateRecord(values, "tblOrder", fields, record);
+                            db.updateRecord(values, "tblOrder", fields, record);
+
+                            String  str = "Order Updated successfully: ";
+                            str += "\n Order ID: " + record[0];
+                            str += "\n Customer ID: " + record[1];
+                            str += "\n Product ID: " + record[2];
+                            str += "\n Employee ID: " + record[3];
+                            str += "\n Order Date: " + record[4];
+                            str += "\n Status: " + record[5];
+
+                            Toast.makeText(getBaseContext(), str, Toast.LENGTH_LONG).show();
                         }
-                        tvAllOrders.setText(row.get(i+1).toString());
                     }
                 }
-
-
             }
         });
 
